@@ -1,0 +1,6 @@
+loader	artisan	/^| Composer provides a convenient, automatically generated class loader$/;"	c
+app	artisan	/^$app = require_once __DIR__.'\/bootstrap\/app.php';$/;"	v
+kernel	artisan	/^$kernel = $app->make(Illuminate\\Contracts\\Console\\Kernel::class);$/;"	v
+status	artisan	/^$status = $kernel->handle($/;"	v
+input	artisan	/^    $input = new Symfony\\Component\\Console\\Input\\ArgvInput,$/;"	v
+uri	server.php	/^$uri = urldecode($/;"	v

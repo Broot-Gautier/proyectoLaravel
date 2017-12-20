@@ -1,0 +1,5 @@
+User	User.php	/^class User extends Authenticatable$/;"	c
+fillable	User.php	/^    protected $fillable = [$/;"	v
+fillable	User.php	/^    protected $fillable = [$/;"	v
+hidden	User.php	/^    protected $hidden = [$/;"	v
+hidden	User.php	/^    protected $hidden = [$/;"	v
