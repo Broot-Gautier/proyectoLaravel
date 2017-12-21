@@ -18,7 +18,10 @@
                 </div>
             </div>
             <td>
-                {!! link_to('suscriptors/news', 'Suscribirse!', ['class' => 'btn btn-primary']) !!} <br>
+                {!! link_to('suscriptors/suscritos', 'Suscriptores a tu cuenta!', ['class' => 'btn btn-primary']) !!} <br>
+            </td>
+            <td>
+                {!! link_to('YoursSuscriptions', 'Usuarios que sigues!', ['class' => 'btn btn-primary']) !!} <br>
             </td>
         </div>
     </div>

@@ -37,6 +37,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('User','App\Suscriptor','user_id','suscriptor_id');
     }
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
     public function addSuscriptor(User $user)
     {
         $this->suscriptors()->attach($user->id);

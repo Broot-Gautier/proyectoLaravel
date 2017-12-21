@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <style>
 * {box-sizing: border-box;}
 
@@ -87,16 +89,11 @@ body {
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}"><font color="0107ff">{{ config('app.name', 'Laravel') }}</font>
                     </a>
-                    <a class="navbar-brand" href="https://github.com/Broot-Gautier"><font color="FF0000">Github Broot</font></a>
                     <a class="navbar-brand" href="https://laravel.com/docs"><font color="FF00CC">Documentacion</font></a>
                     <a class="navbar-brand" href="{{ url('/home') }}">Inicio</a>
+                    <a class="navbar-brand" href="{{ url('/perfil') }}">Perfil</a>
+                    <a class="navbar-brand" href="{{ url('/suscriptors/news') }}">Explora Personas</a>
                     <div class="topnav right">
-                        <div class="search-container">
-                            <form action="/welcome.php" method="get">
-                                <input type="text" placeholder="Search..">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
                     </div>
                 </div>
 
@@ -105,7 +102,6 @@ body {
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -117,7 +113,6 @@ body {
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -149,5 +144,44 @@ body {
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <script>
+    function button_click_suscribir(id)
+        {
+            var url;
+            url= '/SuscriptorsController/consulta_seguimiento/'+id;
+
+            // ajax adding data to database
+            $.ajax({
+                url: url,
+                type: "POST",
+                //data: $('#form_modificar').serialize(),
+                dataType: "JSON",
+                success: function (data)
+                {
+                    if (data.success)
+                    {
+                            toastr["success"]('Ahora esta siguiendo a este usuario');
+                            reload_table();
+
+                    } else
+                    {
+                        toastr["warning"](data.error);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    $('#errors').html(data.error);
+                }
+            });// END AJAX
+            return false;
+        }
+    </script>
+   </body>
 </html>

@@ -30,4 +30,23 @@ class SuscriptorsController extends Controller
         return  View('suscriptors.save')->with('usuarios',$usuarios)->with('suscripcion',$suscripcion)->with('method','POST');
     }
 
+	public	function consulta_seguimiento(Request $request)
+		{
+			$id=$request->id;
+		    $where['id']=$this->input->post('id');
+		    if($consulta)
+		    {
+		            $data['success']=true;
+		            $data['mensaje']='Ahora estas siguiendo a este usuario';
+
+		    }
+		    else
+		    {
+		            $data['success']=False;
+		            $data['mensaje']='Ya estas siguiendo a este usuario';
+		    }
+		            echo json_encode($data);
+
+		}
+
 }
