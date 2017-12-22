@@ -96,8 +96,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::where('id',$id)->get();
-        echo $post;
+       $post = Post::where('id',$id)->first();
+       // echo $post;
+       // echo $post->{'titulo'};
         return View('posts.show')->with('post', $post);
     }
 

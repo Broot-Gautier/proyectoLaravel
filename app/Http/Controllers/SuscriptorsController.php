@@ -11,11 +11,17 @@ use Illuminate\Support\Facades\Redirect;
 
 class SuscriptorsController extends Controller
 {
+	    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
-        $suscriptors = User::all();
+    	$suscriptors = User::all();
         return View('suscriptors.index')->with('suscriptores', $suscriptors);
-    }
+     }
 
   	public function suscritos()
     {

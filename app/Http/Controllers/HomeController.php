@@ -33,23 +33,24 @@ class HomeController extends Controller
         $usuario = User::find(Auth::id());
         $siguiendo = Suscriptor::where('suscriptor_id',$usuario->id)->get();
         //echo count($siguiendo);
-        $suscritos = []; //este es un arreglo con cada post de cada usuarioq ue sigo
+        $suscritos = array(); //este es un arreglo con cada post de cada usuarioq ue sigo
         $contador = 0;
         if(count($siguiendo)>0)
         {
             foreach ($siguiendo as $seguido ) {
                 //echo $seguido->user_id;
-                echo 'br <br>';
+         //       echo 'br <br>';
                 $consulta = Post::where('user_id', $seguido->user_id)->get();
                 if(count($consulta)!=0)
                 {
                     $consulta['name_id'] = User::find($seguido->user_id)->name;
                     $suscritos[$contador] = $consulta;
-                    echo $suscritos[$contador];
+                    ////echo $suscritos[$contador];
                     $contador+=1;
                 }
             }
         }
+       // echo $suscritos[0];
         //$posts = Post::where()
         return view('home')->with('username',$usuario->name)->with('suscritos',$suscritos);
     }

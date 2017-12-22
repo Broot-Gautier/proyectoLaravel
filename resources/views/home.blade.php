@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Inicio</div>
+                <div class="panel-heading">Posts disponibles</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -15,8 +15,9 @@
                         </div>
                     @endif
                     @foreach ($suscritos as $suscrito)
-                        <td> {{ $suscrito->name }} </td>
-                        <br>
+                    <div class="row">
+                    <a href='{{ 'posts/'.$suscrito[0]['id'] }}'> {{ $suscrito['name_id'] }}</a>
+                    </div>
                 @endforeach
                     
                 </div>

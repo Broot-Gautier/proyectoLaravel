@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
  <div class="container">
-    <h1> {{ $post->titulo }} </h1>
+    <h1> {{ $post->{'titulo'} }} </h1>
     <div class="row">
        <div class="col-lg-12">
           {{ $post->descripcion }}
