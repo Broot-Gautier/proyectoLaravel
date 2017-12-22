@@ -33,8 +33,8 @@ class CommentsController extends Controller
     {
         //Crear nuevo comentario.
         //var_dump($post_id);
-        var_dump($_POST);
-        echo $_POST['comentario'];
+        //var_dump($_POST);
+        //echo $_POST['comentario'];
         $comment=$_POST['comentario'];
         if ($comment)
         {

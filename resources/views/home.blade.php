@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h2><span class="label label-primary">Bienvenido <?= $username; ?></span></h2>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -13,16 +14,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    Entraste al sitio, aun no sigues personas asi que busca algunos!
+                    @foreach ($suscritos as $suscrito)
+                        <td> {{ $suscrito->name }} </td>
+                        <br>
+                @endforeach
+                    
                 </div>
             </div>
-            <td>
-                {!! link_to('suscriptors/suscritos', 'Suscriptores a tu cuenta!', ['class' => 'btn btn-primary']) !!} <br>
-            </td>
-            <td>
-                {!! link_to('YoursSuscriptions', 'Usuarios que sigues!', ['class' => 'btn btn-primary']) !!} <br>
-            </td>
         </div>
     </div>
 </div>

@@ -6,25 +6,42 @@
           {{ Session::get('notice') }}
        </div>
     @endif
-    <h1> Perfil de  <?= $usuario->name; ?> </h1>
-    <h2>mail usuario: <?= $usuario->email; ?></h2>
-    <h2> Seguidores: <?= $cantidadSeguidores; ?></h2>
+
+    <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title">Perfil de  <?= $usuario->name; ?></h1>
+  </div>
+  <button class="btn btn-primary" type="button">
+      <?= $usuario->email; ?> <span class="badge"></span>
+    </button> <br>
+    <button class="btn btn-primary" type="button">
+      Seguidores <span class="badge"><?= $cantidadSeguidores; ?></span>
+    </button>
+  </div>
+</div>
+
     <table class="table">
        <thead>
        <tr>
+             <th style="width: 10%">  </th>
+             <th style="width: 10%">  </th>
              <th style="width: 35%"> Posts </th>
-             <th style="width: 10%"> </th>
-             <th style="width: 10%"> </th>
+             <th style="width: 10%"> Descripcion </th>
+             <th style="width: 10%"> Comentarios </th>
              <th style="width: 10%"> </th>
           </tr>
        </thead>
        <tbody>
-          @foreach ($posts as $post)
+          @foreach ($resultados as $post1)
              <tr>
-                <td> {{ $post->titulo }} </td>
-                <td> {{ $post->descripcion }} </td>
+                <td> {!! link_to('comentar/'.$post1['id'] .'/' .$usuario->id, 'Comentar post', ['class' => 'btn btn-primary']) !!} </td>
+                <td> {!! link_to('posts/'.$post1['id'], 'Ver post', ['class' => 'btn btn-primary']) !!} </td>
+                <td> {{ $post1['titulo'] }} </td>
+                <td> {{ $post1['descripcion'] }} </td>
                 <td>
-                    {!! link_to('comentar/'.$post->id .'/' .$usuario->id, 'Comentar post', ['class' => 'btn btn-primary']) !!} <br>
+                  @foreach ($post1['comentario'] as $com1=>$uno)
+                  {{ $uno }}<br>
+                  @endforeach
                 </td>
              </tr>
           @endforeach

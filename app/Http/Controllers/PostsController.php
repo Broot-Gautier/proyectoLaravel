@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use App\User;
 use App\Post;
+use App\Suscriptor;
+use App\Comment;
 
 class PostsController extends Controller
 {
@@ -18,8 +20,39 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = User::find(Auth::id())->posts;
-        return View('posts.index')->with('posts',$posts);
+        $usuario = User::find(Auth::id());
+        $posts = $usuario->posts;
+        $consulta = Suscriptor::where('user_id',$usuario->id)->select('suscriptor_id')->get();
+        $siguiendome = count($consulta);
+        $salida=Array();
+        foreach($posts as $key) 
+        {
+            $resultado=array();
+            $resultado['id']=$key->id;
+            $resultado['titulo']=$key->titulo;
+            $resultado['descripcion']=$key->descripcion;
+/*          echo '<br>';
+            echo $key->id;
+            echo '<br>';
+*/          
+            $comentarios=Comment::where('post_id',$key->id)->select('comentario','id')->get();
+            $comm=array();
+/*          echo '<br>';
+            echo $comentarios->find(1);
+            echo '<br>';
+*/          foreach ($comentarios as $key2 ) 
+            {
+//              var_dump(($key));
+//              echo'<br>';
+                //$comm[]=$key2->id;
+                $comm[]=$key2->comentario;
+            }
+            //var_dump($comm);
+            $resultado['comentario']=$comm;
+            $salida[]=$resultado;
+        }
+
+        return View('posts.index')->with('posts',$posts)->with('cantidadSeguidores',$siguiendome)->with('usuario',$usuario)->with('resultados',$salida);
     }
 
     /**
@@ -48,6 +81,7 @@ class PostsController extends Controller
         $post->titulo = $request->titulo;
         $post->privado = $request->privado;
         $post->descripcion = $request->descripcion;
+        $post->url = $request->url;
         $post->user_id = Auth::id();
         $post->save();
         //redirigir a lista de posts
@@ -62,9 +96,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::where(array(
-            'id' => $id,
-            'user_id' => Auth::id()))->first();
+        $post = Post::where('id',$id)->get();
+        echo $post;
         return View('posts.show')->with('post', $post);
     }
 
@@ -99,9 +132,10 @@ class PostsController extends Controller
         $post->titulo = $request->titulo;
         $post->privado = $request->privado;
         $post->descripcion = $request->descripcion;
+        $post->url = $request->url;
         $post->user_id = Auth::id();
         $post->save();
-        return Redirect::to('posts')->with('notice','post guardado correctamente =)');
+        return Redirect::to('posts')->with('notice','Post guardado correctamente =)');
     }
 
     /**
@@ -117,5 +151,6 @@ class PostsController extends Controller
             'user_id' => Auth::id()
         ))->first();
         $post->delete();
+        return Redirect::to('posts')->with('notice','Post borrado correctamente');
     }
 }

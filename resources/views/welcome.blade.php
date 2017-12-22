@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Bases de Datos
+                    FEIBUTUBE
                 </div>
 
                 <div class="links">

@@ -66,7 +66,7 @@ body {
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Broot App</title>
+    <title>feibutube</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -87,12 +87,11 @@ body {
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}"><font color="0107ff">{{ config('app.name', 'Laravel') }}</font>
-                    </a>
-                    <a class="navbar-brand" href="https://laravel.com/docs"><font color="FF00CC">Documentacion</font></a>
                     <a class="navbar-brand" href="{{ url('/home') }}">Inicio</a>
-                    <a class="navbar-brand" href="{{ url('/perfil') }}">Perfil</a>
+                    <a class="navbar-brand" href="{{ url('/posts') }}">Perfil</a>
                     <a class="navbar-brand" href="{{ url('/suscriptors/news') }}">Explora Personas</a>
+                    <a class="navbar-brand" href="{{ url('/suscriptors/suscritos') }}">Suscriptores a tu cuenta!</a>
+                    <a class="navbar-brand" href="{{ url('/YoursSuscriptions') }}">Usuarios que sigues!</a>
                     <div class="topnav right">
                     </div>
                 </div>
@@ -125,11 +124,6 @@ body {
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                                    </li>
-                                    <li>
-                                       <a href="/posts">
-                                          Posts
-                                       </a>
                                     </li>
                                 </ul>
                             </li>

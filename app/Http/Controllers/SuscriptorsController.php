@@ -27,6 +27,7 @@ class SuscriptorsController extends Controller
     {
        $usuarios = User::all();
         $suscripcion = new Suscriptor();
+        //return Redirect::to('suscriptors/news');
         return  View('suscriptors.save')->with('usuarios',$usuarios)->with('suscripcion',$suscripcion)->with('method','POST');
     }
 
